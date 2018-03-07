@@ -1,2 +1,3 @@
-# A.V.S.O
-Analise de Vulnerabilidade para Sistemas Operacionais
+# A.V.I.S.O
+Analise de Vulnerabilidade Independente do Sistema Operacional
+
