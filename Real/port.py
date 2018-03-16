@@ -1,19 +1,19 @@
 __author__ = "Gabriel Laureth Philippi"
 
 """
-PortScan Versão 3.0
+PortScan Versão 5.0
 
 OBS: Está função não deve ser executada individualmente, ela faz parte do arquivo inicializador.py
 
 """
 
 #Imports
-import socket, time, os
+import socket, time, os, platform
 
 class Scan:
 
     portasAbertas = []
-    port = [["5", "RJE", "(REMOT JOB ENTRY), Acesso remoto á área de trabalho Habilitada","TCP"],
+    port = [["5", "RJE", "(REMOT JOB ENTRY) Seu computador pode estar infectado por um TROJAN ou VIRUS","TCP"],
             ["20", "FTP", "(FILE TRANSFER PROTOCOL), Transferencia de arquivos Habilitada","TCP"],
             ["21", "FTP", "(FILE TRANSFER PROTOCOL), Transferencia de arquivos Habilitada","TCP"],
             ["22", "SSH", "(SECURE SHELL) Acesso Remoto ao computador habilitada","TCP"],
@@ -33,7 +33,11 @@ class Scan:
         """
 
     def iniciarScan(self):
+        self.arquitetura = platform.architecture()
         print("A.V.I.S.O, Software de analise de vulnerabilidades")
+        print("Sistema Operacional: %s" %(platform.platform()))
+        print("Arquitetura: %s" %(self.arquitetura[0]))
+        print("Nome da Maquina: %s" %platform.node())
         self.inicio = time.time()
         try:
             print()
@@ -48,6 +52,8 @@ class Scan:
             self.fim = time.time()
             print()
             print("Scan finalizado em %i segundos" %(abs(self.fim-self.inicio)))
+            print()
+            print(self.analisarProtecao())
             print()
             a = input("Enter para sair...")
             os.system("clear")
@@ -65,6 +71,12 @@ class Scan:
         print()
         print("Scanner Completo")
         print()
+        os.system("clear")
+        print("A.V.I.S.O, Software de analise de vulnerabilidades")
+        print("Sistema Operacional: %s" %(platform.platform()))
+        print("Arquitetura: %s" %(self.arquitetura[0]))
+        print("Nome da Maquina: %s" %platform.node())
+        print()
         print("Portas Abertas")
         for i in self.portasAbertas:
             verify = False
@@ -78,3 +90,10 @@ class Scan:
             if not verify:
                 print("%s/??? - Serviço Desconhecido" %(i))
                 print()
+
+    def analisarProtecao(self):
+        valor = 65535
+        valor -= len(self.portasAbertas)
+        resultado = valor/65535
+        resultado *= 100
+        print("Seu computador está %s%% protegido em relação as portas" %(int(resultado)))

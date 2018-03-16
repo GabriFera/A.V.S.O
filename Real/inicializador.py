@@ -21,6 +21,7 @@ class Inicializador():
         port = Scan(self.IP)
         port.iniciarScan()
 
+
 if __name__ == "__main__":
     os.system("clear")
     i = Inicializador()
@@ -28,6 +29,10 @@ if __name__ == "__main__":
         print(
     """
 A.V.I.S.O
+Analise de Vulnerabilidade Independente do Sistema Operacional
+
+
+ATENÇÃO: a velocidade de algumas aplicações depende de sua conexão a internet
 
 Escolha uma das Opções
 
